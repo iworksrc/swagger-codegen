@@ -10,16 +10,16 @@ import { {{classname}} } from './{{importPath}}';
 {{/apiInfo}}
 
 @NgModule({
-  imports:      [ CommonModule, HttpModule ],
-  declarations: [],
-  exports:      [],
-  providers:    [ {{#apiInfo}}{{#apis}}{{classname}}{{#hasMore}}, {{/hasMore}}{{/apis}}{{/apiInfo}} ]
+    imports: [ CommonModule, HttpModule ],
+    declarations: [],
+    exports: [],
+    providers: [ {{#apiInfo}}{{#apis}}{{classname}}{{#hasMore}}, {{/hasMore}}{{/apis}}{{/apiInfo}} ]
 })
 export class ApiModule {
     public static forConfig(configurationFactory: () => Configuration): ModuleWithProviders {
         return {
             ngModule: ApiModule,
             providers: [ {provide: Configuration, useFactory: configurationFactory}]
-        }
+        };
     }
 }
