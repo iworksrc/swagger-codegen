@@ -1,22 +1,22 @@
 {{>licenseInfo}}
 /* tslint:disable:no-unused-variable member-ordering */
 
-import { Inject, Injectable, Optional }                      from '@angular/core';
-import { Http, Headers, URLSearchParams }                    from '@angular/http';
+import { Inject, Injectable, Optional } from '@angular/core';
+import { Http, Headers, URLSearchParams } from '@angular/http';
 import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http';
-import { Response, ResponseContentType }                     from '@angular/http';
+import { Response, ResponseContentType } from '@angular/http';
 
-import { Observable }                                        from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import '../rxjs-operators';
 
 {{#imports}}
 import { {{classname}} } from '../{{filename}}';
 {{/imports}}
 
-import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
-import { Configuration }                                     from '../configuration';
+import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
+import { Configuration } from '../configuration';
 {{#withInterfaces}}
-import { {{classname}}Interface }                            from './{{classname}}Interface';
+import { {{classname}}Interface } from './{{classname}}Interface';
 {{/withInterfaces}}
 
 {{#operations}}
@@ -44,7 +44,7 @@ export class {{classname}} {
         }
         if (configuration) {
             this.configuration = configuration;
-			this.basePath = basePath || configuration.basePath || this.basePath;
+            this.basePath = basePath || configuration.basePath || this.basePath;
         }
     }
 
@@ -54,9 +54,9 @@ export class {{classname}} {
      * @param objA object to be extended
      * @param objB source object
      */
-    private extendObj<T1,T2>(objA: T1, objB: T2) {
-        for(let key in objB){
-            if(objB.hasOwnProperty(key)){
+    private extendObj<T1, T2>(objA: T1, objB: T2) {
+        for (const key in objB) {
+            if (objB.hasOwnProperty(key)) {
                 (objA as any)[key] = (objB as any)[key];
             }
         }
@@ -69,7 +69,7 @@ export class {{classname}} {
      */
     private canConsumeForm(consumes: string[]): boolean {
         const form = 'multipart/form-data';
-        for (let consume of consumes) {
+        for (const consume of consumes) {
             if (form === consume) {
                 return true;
             }
@@ -118,8 +118,8 @@ export class {{classname}} {
         const path = this.basePath + '{{{path}}}'{{#pathParams}}
                     .replace('${' + '{{baseName}}' + '}', String({{paramName}})){{/pathParams}};
 
-        let queryParameters = new URLSearchParams();
-        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        const queryParameters = new URLSearchParams();
+        const headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
 
 {{#allParams}}
 {{#required}}
@@ -187,7 +187,7 @@ export class {{classname}} {
 {{/hasFormParams}}
 
         // to determine the Accept header
-        let produces: string[] = [
+        const produces: string[] = [
             {{#produces}}
             '{{{mediaType}}}'{{#hasMore}},{{/hasMore}}
             {{/produces}}
@@ -197,14 +197,14 @@ export class {{classname}} {
         // authentication ({{name}}) required
 {{#isApiKey}}
 {{#isKeyInHeader}}
-        if (this.configuration.apiKeys["{{keyParamName}}"]) {
-            headers.set('{{keyParamName}}', this.configuration.apiKeys["{{keyParamName}}"]);
+        if (this.configuration.apiKeys['{{keyParamName}}']) {
+            headers.set('{{keyParamName}}', this.configuration.apiKeys['{{keyParamName}}']);
         }
 
 {{/isKeyInHeader}}
 {{#isKeyInQuery}}
-        if (this.configuration.apiKeys["{{keyParamName}}"]) {
-            queryParameters.set('{{keyParamName}}', this.configuration.apiKeys["{{keyParamName}}"]);
+        if (this.configuration.apiKeys['{{keyParamName}}']) {
+            queryParameters.set('{{keyParamName}}', this.configuration.apiKeys['{{keyParamName}}']);
         }
 
 {{/isKeyInQuery}}
@@ -219,7 +219,7 @@ export class {{classname}} {
 {{#isOAuth}}
         // oauth required
         if (this.configuration.accessToken) {
-            let accessToken = typeof this.configuration.accessToken === 'function'
+            const accessToken = typeof this.configuration.accessToken === 'function'
                 ? this.configuration.accessToken()
                 : this.configuration.accessToken;
             headers.set('Authorization', 'Bearer ' + accessToken);
@@ -265,7 +265,7 @@ export class {{classname}} {
             responseType: ResponseContentType.Blob,
 {{/isResponseFile}}
             search: queryParameters,
-            withCredentials:this.configuration.withCredentials
+            withCredentials: this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
