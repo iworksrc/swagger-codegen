@@ -221,10 +221,14 @@ public abstract class AbstractJavaJAXRSServerCodegen extends AbstractJavaCodegen
     public String apiFilename(String templateName, String tag) {
         String result = super.apiFilename(templateName, tag);
 
-        if ( templateName.endsWith("Impl.mustache") ) {
+        if ( templateName.endsWith("ImpL.mustache") ) {
             int ix = result.lastIndexOf('/');
-            result = result.substring(0, ix) + "/impl" + result.substring(ix, result.length() - 5) + "ServiceImpl.java";
+            result = result.substring(0, ix) + "/impl" + result.substring(ix, result.length() - 5) + "Impl.java";
             result = result.replace(apiFileFolder(), implFileFolder(implFolder));
+        } else if ( templateName.endsWith("Impl.mustache") ) {
+                int ix = result.lastIndexOf('/');
+                result = result.substring(0, ix) + "/impl" + result.substring(ix, result.length() - 5) + "ServiceImpl.java";
+                result = result.replace(apiFileFolder(), implFileFolder(implFolder));
         } else if ( templateName.endsWith("Factory.mustache") ) {
             int ix = result.lastIndexOf('/');
             result = result.substring(0, ix) + "/factories" + result.substring(ix, result.length() - 5) + "ServiceFactory.java";

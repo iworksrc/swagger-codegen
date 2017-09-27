@@ -28,6 +28,9 @@ io.swagger.codegen.languages.JavaClientCodegen
 io.swagger.codegen.languages.JavaInflectorServerCodegen
 io.swagger.codegen.languages.JavaJAXRSCXFCDIServerCodegen
 io.swagger.codegen.languages.JavaJAXRSSpecServerCodegen
+io.swagger.codegen.languages.JavaJAXRSSpecImplServerCodegen
+io.swagger.codegen.languages.JavaJAXRSSpecWarServerCodegen
+io.swagger.codegen.languages.JavaJAXRSSpecPomServerCodegen
 io.swagger.codegen.languages.JavaJerseyServerCodegen
 io.swagger.codegen.languages.JavaJerseyServerCodegen
 io.swagger.codegen.languages.JavaMSF4JServerCodegen

@@ -27,6 +27,7 @@ public class JavaJAXRSSpecServerCodegen extends AbstractJavaJAXRSServerCodegen
     private static final String INTERFACE_ONLY = "interfaceOnly";
 
     protected boolean interfaceOnly = false;
+    protected boolean restAppGenerate = true;
 
     public JavaJAXRSSpecServerCodegen()
     {
@@ -93,7 +94,7 @@ public class JavaJAXRSSpecServerCodegen extends AbstractJavaJAXRSServerCodegen
 
         writeOptional(outputFolder, new SupportingFile("pom.mustache", "", "pom.xml"));
 
-        if (!interfaceOnly) {
+        if (!interfaceOnly && restAppGenerate) {
             writeOptional(outputFolder, new SupportingFile("RestApplication.mustache",
                     (sourceFolder + '/' + invokerPackage).replace(".", "/"), "RestApplication.java"));
         }
