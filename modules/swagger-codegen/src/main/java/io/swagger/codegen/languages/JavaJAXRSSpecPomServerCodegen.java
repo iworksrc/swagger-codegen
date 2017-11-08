@@ -8,6 +8,7 @@ public class JavaJAXRSSpecPomServerCodegen extends JavaJAXRSSpecServerCodegen {
         super();
         modelTemplateFiles.clear();
         apiTemplateFiles.clear();
+        restAppGenerate = false;
     }
 
     @Override
